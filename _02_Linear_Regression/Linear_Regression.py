@@ -25,25 +25,17 @@ def ridge(data):
     pred = np.dot(theta, data)
     return pred
 
-def lasso(data):
-    # 加载数据
-    X_train, y_train = read_data()
-    # 添加偏置项
-    m, n = X_train.shape
-    X_train = np.column_stack((np.ones((m, 1)), X_train))
-    n += 1  # 因为加了一列全为1的向量
-    # Lasso回归
-    alpha = 0.1  # 正则化系数
-    n_iter = 200000  # 迭代次数
-    eta = 1e-13  # 学习率
-    theta = np.zeros(n)  # 初始化模型参数
-    for _ in range(n_iter):  # 迭代求解
-        gradient = (1/m) * X_train.T.dot(X_train.dot(theta) - y_train) + alpha * np.sign(theta)
-        theta -= eta * gradient
-    # 预测
-    data = np.insert(data, 0, 1)  # 插入偏置项
-    pred = np.dot(theta, data)
-    return pred
+    def lasso(data):
+    x_train, y_train = read_data() # 加载数据集
+    w = np.zeros(len(x_train[0]))
+    learning_rate = 1e-13
+    num_iters = 100000
+    lamda = 0.1
+    for i in range(num_iters):
+    y_pred = np.dot(x_train, w)
+    error = y_train - y_pred
+    gradient = -2 * np.dot(x_train.T, error) + lamda * np.sign(w) # 计算梯度
+    w -= learning_rate * gradient # 更新权重w
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
