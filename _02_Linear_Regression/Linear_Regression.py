@@ -33,8 +33,8 @@ def lasso(data):
     X_train = np.column_stack((np.ones((m, 1)), X_train))
     n += 1  # 因为加了一列全为1的向量
     # Lasso回归
-    alpha = 0.1  # 正则化系数
-    n_iter = 1000  # 迭代次数
+    alpha = 1e-12  # 正则化系数
+    n_iter = 100000  # 迭代次数
     eta = 0.01  # 学习率
     theta = np.zeros(n)  # 初始化模型参数
     for _ in range(n_iter):  # 迭代求解
