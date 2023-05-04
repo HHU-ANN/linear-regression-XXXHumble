@@ -35,7 +35,7 @@ def lasso(data):
     # Lasso回归
     alpha = 0.01  # 正则化系数
     n_iter = 2000000  # 迭代次数
-    eta = 1e-12  # 学习率
+    eta = 1e-13  # 学习率
     theta = np.zeros(n)  # 初始化模型参数
     for _ in range(n_iter):  # 迭代求解
         gradient = (1/m) * X_train.T.dot(X_train.dot(theta) - y_train) + alpha * np.sign(theta)
